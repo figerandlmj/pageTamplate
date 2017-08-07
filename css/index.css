@@ -1,0 +1,46 @@
+.header{
+	/*height:20%;*/
+	background: red;
+}
+.body-wrapper{
+	/*height:60%;*/
+	text-align: center;
+}
+.footer{
+	height:20%;
+	background: blue;
+	position: relative;
+}
+.test-flex >div{
+	height:30px;
+	line-height: 30px;
+	border:1px solid #eee;
+	text-align: center;
+}
+.test-flex .hover{
+	background: #eee;
+}
+.search-wrap{
+	text-align: center;
+	margin-top:10px;
+}
+.search{
+	width: 80%;
+	height:30px;
+    line-height:20px; 
+    padding:0 10px;
+    vertical-align:middle;
+	border:1px solid #f00;
+}
+.date,.telephone,.idcard{
+	width: 80%;
+	height:30px;
+    line-height:20px; 
+    padding:0 10px;
+    vertical-align:middle;
+	border:1px solid #f00;
+	margin:20px 0;
+}
+.swiper-slide{
+	height:100px;
+}

@@ -1,0 +1,239 @@
+*{
+	padding:0;
+	margin:0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);/* 禁止页面点击时的高亮 */
+}
+html{
+	height:100%;
+	font-size:62.5%;
+}
+body{
+	width: 100%;
+	height:100%;
+	background: #fff;
+	font-size:12px; /* 设置12px字体,解决不支持rem的浏览器的兼容问题 */
+	font-size:1.2rem;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+ul,li{ 
+	list-style: none;
+	list-style-type:none;
+}
+img,input{
+	border:0;
+}
+a{
+	text-decoration:none;
+}
+a:hover{
+	text-decoration:none;
+}
+a,img,button,textarea,input{
+	-webkit-appearance: none;/* 取消默认样式 */
+}
+input{
+	outline:none;
+}
+.fl{
+	float:left;
+}
+.fr{
+	float:right;
+}
+.none{
+	display:none;
+}
+.cursor{
+	cursor: pointer;
+}
+.clearfix{/* 清除浮动 */
+  	clear: both;
+}
+.clearfix:after{
+  	display:block;
+  	clear:both;
+  	content:"";
+  	visibility:hidden;
+  	height:0;
+  	font-size:0; 
+	line-height:0;
+} 
+.text-over-hide{/* 单行溢出显示省略 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* flex弹性布局 */
+.mui-flex,
+.mui-flex *,
+.mui-flex :after,
+.mui-flex :before {
+	box-sizing: border-box;
+}
+.mui-flex {
+	display: -webkit-box!important;
+	display: -webkit-flex!important;
+	display: -ms-flexbox!important;
+	display: flex!important;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
+.mui-flex>.cell {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	-webkit-flex-basis: 0;
+	-ms-flex-preferred-size: 0;
+	flex-basis: 0;
+	display: block;
+	width: 0;
+	max-width: 100%;
+	padding: 0!important;
+	position: relative;
+}
+.mask-wrap{/* 遮罩层 */
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.5);
+	position: fixed;
+	top: 0;
+	left:0;
+	z-index: 999;
+	display: box;
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-moz-align-items: center;
+	-ms-align-items: center;
+	-o-align-items: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-moz-justify-content: center;
+	-ms-justify-content: center;
+	-o-justify-content: center;
+	justify-content: center;
+}
+/* 页面加载动画 */
+.load-animation >div{
+	display:inline-block;
+	width:85px;
+	height:105px;
+	position:absolute;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+	margin:auto;
+	z-index: 999999;
+}
+.load-animation p{
+	font-size: 1.4rem;
+	color: #fff;
+	text-align:center;
+}
+/* 提示信息 */
+.tip-information >div{
+	width:200px;
+	height:auto;
+	background:#fff;
+	padding:10px;
+	border-radius:6px;
+	text-align: center;
+}
+.tip-information .tip{
+	font-size: 1.4rem;
+	color: #000;
+	line-height: 20px;
+	margin-bottom: 10px;
+}
+.tip-information .message{
+	font-size: 1.4rem;
+	color: #f0b20c;
+	line-height: 20px;
+}
+.tip-information .btns{
+	margin:20px 0 0;
+}
+.tip-information .btns input{
+	padding: 0.4em 0em!important;
+	margin: 0 0.3em;
+	border-radius: 6px;
+	font-size: 1.4rem;
+	color: #fff;
+	-webkit-appearance: none;
+}
+.tip-information .btn1{
+	background: #24c890;
+}
+.tip-information .btn2{
+	background: #f0b20c;
+}
+/* 无数据 */
+.no-data >div{
+	height:115px;
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	margin:auto;
+}
+.no-data img{
+	display: block;
+	margin:0 auto;
+}
+.no-data p{
+	text-align: center;
+	font-size: 1.4rem;
+	color: #000;
+	margin-top:10px;
+}
+/* 加载更多 */
+.load-more{
+	display: none;
+}
+.load-more img{
+	display: block;
+	margin:10px auto 0px;
+	padding-bottom:10px;
+}
+/* 返回顶部 */
+.back-to-top{
+	width:40px;
+	height:40px;
+	background: #000;
+	opacity: 0.7;
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    border-radius: 50%;
+    display:none;
+}
+.back-to-top span{
+	display: block;
+    width: 24px;
+    height: 24px;
+    background: url(../images/return_top.png) no-repeat;
+    background-size: 24px 24px;
+    margin: 10px auto 0;
+}
+/* 轮播 */
+.swiper-pagination-bullet{
+	background: #fff;
+}
+.swiper-pagination-bullet-active{
+	background: #007aff;
+}
+/* 地图 */
+.allmap{
+	width: 100%;
+	height:500px;
+}
