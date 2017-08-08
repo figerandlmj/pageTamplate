@@ -20,7 +20,7 @@ var cssHash = {
 //js Map  
 var jsHash = {
     jquery:[{url:"js/jquery-1.7.2.min.js",version: "2017080202"}],
-    common:[{url:"js/common.js",version: "2017080708"}],
+    common:[{url:"js/common.js",version: "2017080806"}],
     swiper:[{url:"js/swiper-3.4.2.jquery.min.js", version: "2017080402"}]
 }
 

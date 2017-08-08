@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <title>选择站点</title>
+    <script type="text/javascript">
+        document.write("<script src='js/config.js?version="+new Date().getTime()+"'><\/script>");
+    </script>
+    <script type="text/javascript">
+        loadCss("base");
+        loadCss("index");
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="search-box">
+            <input type="text" value="" placeholder="请输入站点名称（如北京）" class="font-size4 font-color1" id="search-input"/>
+        </div>
+        <div class="city-main">
+            <div class="city-list" id="search-city">
+                <!-- <p class="title">没有结果</p>
+                <p class="city">阿坝藏族羌族自治州</p> -->
+            </div>
+        </div>
+        <div class="current-city-wrap">
+            <p class="title">当前城市</p>
+            <span class="cursor current-city">定位中...</span>
+        </div>
+        <div class="city-main" id="letter-city">
+            <!-- <div class="city-list">
+                <p class="title" id="a">A</p>
+                <p class="city">阿坝藏族羌族自治州</p>
+                <p class="city">阿克苏地区</p>
+                <p class="city">阿拉尔市</p>
+                <p class="city">阿拉善盟</p>
+                <p class="city">阿勒泰地区</p>
+                <p class="city">阿里地区</p>
+                <p class="city">安康市</p>
+                <p class="city">安庆市</p>
+                <p class="city">安顺市</p>
+                <p class="city">安阳市</p>
+                <p class="city">鞍山市</p>
+                <p class="city">澳门特别行政区</p>
+            </div> -->
+        </div>
+        <div class="city-right font-size8 font-color4">
+            <div>
+                <a href="#a"><p>全部</p></a>
+                <a href="#a"><p>A</p></a>
+                <a href="#b"><p>B</p></a>
+                <a href="#c"><p>C</p></a>
+                <a href="#d"><p>D</p></a>
+                <a href="#e"><p>E</p></a>
+                <a href="#f"><p>F</p></a>
+                <a href="#g"><p>G</p></a>
+                <a href="#h"><p>H</p></a>
+                <!-- <a href="#i"><p>I</p></a> -->
+                <a href="#j"><p>J</p></a>
+                <a href="#k"><p>K</p></a>
+                <a href="#l"><p>L</p></a>
+                <a href="#m"><p>M</p></a>
+                <a href="#n"><p>N</p></a>
+                <a href="#o"><p>O</p></a>
+                <a href="#p"><p>P</p></a>
+                <a href="#q"><p>Q</p></a>
+                <a href="#r"><p>R</p></a>
+                <a href="#s"><p>S</p></a>
+                <a href="#t"><p>T</p></a>
+                <!-- <a href="#u"><p>U</p></a>
+                <a href="#v"><p>V</p></a> -->
+                <a href="#w"><p>W</p></a>
+                <a href="#x"><p>X</p></a>
+                <a href="#y"><p>Y</p></a>
+                <a href="#z"><p>Z</p></a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        loadJs("jquery");
+        loadJs("common");  
+    </script>
+    <script type="text/javascript">
+
+        var letter_arr=['A','B','C','D','E','F','G','H','J','K','L','M','N','O','P','Q','R','S','T','W','X','Y','Z'];
+        var num=0;
+        var letter=letter_arr[num];
+        var name="",load_flag=true;
+        // 右侧字母样式适应
+
+        $(".city-right p").css({
+            "height":($(window).height()-38)/24
+        })
+
+        // 获取flag
+        var this_flag="";
+        function setCity(flag,current_city){
+            this_flag=flag;
+            $(".current-city").text(current_city);
+            getCityInfo(1);
+        }
+        
+        // 按字母查询站点列表
+        function getCityInfo(flag){
+            var url="TrainSearch/stationList";
+            var data={
+                letter:letter,
+                name:name,
+                client:client
+            }
+            ajaxRequest(url, 'GET',true, data, callback);
+            function callback(result) {
+                if(result.code==200){
+                    var data=result.data;
+                    var data_length=data.length;
+                    if(data_length>0){
+                        var html="";
+                        if(flag==1 || flag==2){
+                            var letter=data[0].letter;
+                            var lowLetter=letter.toLowerCase();
+                            html+='<div class="city-list">';
+                            html+='    <p class="title" id="'+lowLetter+'">'+letter+'</p>';
+                        }
+                        for(var i=0;i<data_length;i++){
+                            html+='<p class="cursor city">'+data[i].name+'</p>';   
+                        }
+                        if(flag==1){
+                            html+='</div>';
+                            $("#letter-city").html(html);
+                        }else if(flag==2){
+                            html+='</div>';
+                            $("#letter-city").append(html);
+                        }else if(flag==0){
+                           $("#search-city").html(html); 
+                        }
+                    }else if(flag==0){
+                        $("#search-city").html('<p class="title">没有结果</p>'); 
+                    }
+                    load_flag=true;
+                }
+            }
+        }
+        $(".city-right a").on("click",function(){
+            letter=$(this).find("p").text();
+            if(letter=="全部"){
+                letter="A";
+            }
+            name="";
+            for(var i=0;i<23;i++){
+                if(letter_arr[i]==letter){
+                    num=i;
+                }
+            }
+            getCityInfo(1);
+            var height=$(".search-box").height()+20+$("#search-city").height()+$(".current-city-wrap").height();
+            $('body,html').animate({scrollTop:height});
+        })
+        window.onscroll = function () { 
+
+            // 滑到底部加载更多
+            if (getScrollHeight()<= getScrollTop() + $(window).height()) { 
+                if(num<23){
+                    num+=1;
+                    name="";
+                    letter=letter_arr[num];
+                    getCityInfo(2);
+                }
+            }
+        }
+        // 搜索事件
+        $('#search-input').bind('input propertychange', function() {  
+            $("#search-city").html("");
+            letter="";
+            name=$('#search-input').val();
+            name=name.replace(/[^\u4e00-\u9fa5]/gi,"");
+            if(name!="" && load_flag){
+                load_flag=false;
+                getCityInfo(0);
+            }
+            
+        });
+
+        document.onkeydown = function(e){
+            // if(!e) e = window.event;  //火狐中是 window.event
+            if((e.keyCode || e.which) == 13){
+                $("#search-city").html("");
+                letter="";
+                name=$('#search-input').val();
+                name=name.replace(/[^\u4e00-\u9fa5]/gi,"");
+                if(name!=""){
+                    getCityInfo(0);
+                }
+            }
+        }
+        // 选择城市
+        $(".city,.current-city").live("click",function(){
+            var city_name=$(this).text();
+            var para="getCity('" + this_flag + "','" + city_name + "');";
+            if(ismobile(1)==1){
+                Android.callPlaneReturn(para);
+            }else{
+                jsToios("planeReturn",para);
+            }
+        })
+
+    </script>
+</body>
+</html>

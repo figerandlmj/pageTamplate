@@ -37,8 +37,28 @@
 		<input type="text" readonly id="date" class="date" placeholder="请选择日期">
 		<input type="tel" value="" placeholder="请输入手机号码" maxlength="13" pattern="[0-9,\s]*" oninput="if(value.length>13)value=value.slice(0,13)" onkeyup="value=value.replace(/[^0-9,\s]/g,'')" onpaste="value=value.replace(/[^0-9,\s]/g,'')" oncontextmenu = "value=value.replace(/[^0-9,\s]/g,'')" class="telephone" id="telephone"/>
 		<input type="text" value="" placeholder="请输入身份证号码" maxlength="18" oninput="if(value.length>18)value=value.slice(0,18);value=value.replace(/[^0-9xX]/g,'')" onpaste="value=value.replace(/[^0-9xX]/g,'')" oncontextmenu = "value=value.replace(/[^0-9xX]/g,'')" class="idcard"/>
+		<!-- 最大十万位 -->
+		<input type="text" value="" placeholder="请输入消费金额" maxlength="9" id="pay-input" class="pay-input">
+		<input type="button" value="发送验证码" id="code-btn" class="code-btn"/>
 		<!-- <img src="images/banner3.png" alt="" width="100%" height="100%" onerror="this.src=\'images/default.png\'"> -->
 		<img src="images/banner3.png" alt="" width="100%" height="100%" onerror="this.src='images/default.png'">
+
+		<!-- 图片上传 -->
+		<div class="img-wrap">
+			<img src="images/idcard_img03.jpg" alt="" width="100%" height="100%" id="ImgPh">
+			<div class="upload-btn">
+				<span class="icon icon-upload"></span>
+				<label class="font-color1">点击上传<em style="display:none;" id="loading"> (上传中...)</em></label>
+			</div>
+			<input name="" type="file" accept="image/*" id="inputstyle"/>
+		</div>
+
+		<div id="scrolling" class="scrolling">
+			<ul>
+		        <li class="text-over-hide">罗莱床品、3000积分达标即抢！</li>
+		        <li class="text-over-hide">罗莱床品、3000积分达标即抢！</li>
+		    </ul>
+		</div>
 	</div>
 	<div class="footer">this id footer</div>
 	<div id="load-more" class="load-more"><img src="images/circle.gif" width="32" height="32"/></div>
@@ -49,6 +69,8 @@
 		loadJs("common"); 
 	</script>
 	<script src="js/datePicker.js"></script>
+	<script src="js/aliyun-oss-sdk-4.4.4.min.js"></script>
+	<script src="js/aliyun-oss-main.js"></script>
 	<script type="text/javascript">
 
 		// JSON.parse();//字符串转换为json
@@ -56,6 +78,97 @@
 		// str.replace("w","");//替换字符串中某个字符
 		// prop("checked",true);//拥有boolean特性的属性用prop修改
 		// $(document).attr("title","test title");//设置title
+		// window.location.href=redirectUrl;//页面重定向
+		// window.location.replace(redirectUrl);//销毁当前页面后重定向 
+
+		function WebSocketTest(this_outOrderNo){
+			var websocket = null;
+		    //判断当前浏览器是否支持WebSocket
+		    if ('WebSocket' in window) {
+		        websocket = new WebSocket(websocket_url);
+		    }else {
+		        // tipInformation('当前浏览器不支持WebSocket');
+		    }
+
+		    //连接发生错误的回调方法
+		    websocket.onerror = function () {
+		        // tipInformation("WebSocket连接发生错误");
+		    };
+
+		    //连接成功建立的回调方法
+		    // websocket.onopen = function () {
+		    //     tipInformation("WebSocket连接成功");
+		    // }
+
+		    //接收到消息的回调方法
+		    websocket.onmessage = function (event) {
+		        // setMessageInnerHTML(event.data);
+		        var result=JSON.parse(event.data);
+		        // alert(JSON.stringify(result)+"/"+this_outOrderNo)
+		        // if(result.outOrderNo==this_outOrderNo){
+		        // 	toOrderDetail(this_outOrderNo);
+		        // }
+		    }
+
+		    //连接关闭的回调方法
+		    websocket.onclose = function () {
+		        // tipInformation("WebSocket连接关闭");
+		    }
+		    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+		    window.onbeforeunload = function () {
+		        closeWebSocket();
+		    }
+		    //关闭WebSocket连接
+		    function closeWebSocket() {
+		        websocket.close();
+		    }
+		}
+
+		// 距离转换
+		var distance=1.5,distance_html="";
+        if(distance<1){
+            var this_distance=distance*1000;
+            if(this_distance>=100){
+                distance=this_distance.toString().substring(3,0);
+            }else if(this_distance>=10){
+                distance=this_distance.toString().substring(2,0);
+            }else{
+                distance=this_distance.toString().substring(1,0);
+            }
+            distance_html='&nbsp;&nbsp;'+distance+'m';
+        }else{
+            distance=parseFloat(distance).toFixed(1);
+            distance_html='&nbsp;&nbsp;'+distance+'km';
+        }
+		// 照片上传到阿里云
+		var shop_img="";
+		var shop_img_key="";
+		var flag=0;
+    	$("#inputstyle").change(function (e) {
+			uploadFile(client,e,fileCallBack,preback);
+			function preback(){
+				flag=1;
+				$("#loading").show();
+			}
+			function fileCallBack(key){//key为返回的图片
+				shop_img_key=key;
+				shop_img = uploadImgUrl+key;
+				$("#ImgPh").attr("src",shop_img);
+				setTimeout(function(){
+					$("#loading").hide();
+				},1000);
+				flag=2;
+		    }
+		});
+
+		var area = document.getElementById('scrolling');
+		scrolling(area,26);
+
+		checkMoney($("#pay-input"),1000000);
+
+		$("#code-btn").on("click",function(){
+			countDown($("#code-btn"),10);
+		})
 
 		$('#telephone').bind('input propertychange',function(){
             FillMobile($(this));

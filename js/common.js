@@ -229,6 +229,29 @@ function validateIdCard(idCard) {
         return false;  
     }  
 }
+// 输入金额校验
+function checkMoney(element,digit){
+    element.keyup(function () {
+        var reg = $(this).val().match(/\d+\.?\d{0,2}/);
+        var txt = '';
+        if (reg != null) {
+            txt = reg[0];
+        }
+        $(this).val(txt);
+    }).change(function () {
+        $(this).keypress();
+        var v = $(this).val();
+        if (/\.$/.test(v)){
+            $(this).val(v.substr(0, v.length - 1));
+        }
+    });
+    element.bind('input propertychange', function() {
+        var v = $(this).val();
+        if(parseInt(v)>digit){
+            $(this).val(v.substr(0, 6));
+        }
+    })
+}
 // 本地存储
 function setLocalStorage(key, value) {
     var storage = window.localStorage;
@@ -259,7 +282,27 @@ function getRequest() {
     } 
     return theRequest; 
 } 
-
+// 判断页面加载来源（uub,微信，支付宝）
+function isWeixinOrAlipay(){
+    var ua = window.navigator.userAgent.toLowerCase();
+    var channel=0;
+    //判断是不是支付宝
+    if (ua.match(/AlipayClient/i) == 'alipayclient') {
+        // alert("Alipay");  
+        channel=1;
+    }
+    //判断是不是微信
+    if ( ua.match(/MicroMessenger/i) == 'micromessenger' ) {  
+        // alert("WeiXIN");
+        channel=2;
+    } 
+    // uub
+    if ( ua.match(/UUTFClient/i) == 'uutfclient' ) {  
+        // alert("uub");  
+        channel=3;
+    } 
+    return channel;
+}
 //获得当前日期的后x天，通用
 function nextDay(x,dates){ 
 
@@ -276,6 +319,21 @@ function nextDay(x,dates){
     }
     var nextdate=year+"年"+month+"月"+day+"日";
     return nextdate;
+}
+//获得某个时间经过x分钟之后的时间
+function nextTime(x,dates){ 
+
+    var mydate = new Date(dates.replace(/-/g,"/"));
+    var time=new Date(mydate.getTime() + x*60*1000);
+    var h=time.getHours(); //获取小时
+    var m=time.getMinutes(); //获取分钟
+    if(h<10){
+        h='0'+h;
+    }
+    if(m<10){
+        m='0'+m;
+    }
+    return h+":"+m;
 }
 // 返回某个日期的星期
 function getDay(year,month,date) {
@@ -372,4 +430,70 @@ function getSystemTime(){
     }
     return systemtime;//2017-08-03 10:30:47
 }
+// 接口返回非200调用函数
+function back800Msg(code,msg){
+    if(code==800){
+        tipInformation(msg,function(){
+            if(ismobile(1)==1){
+                Android.callLogin(800);
+            }else{
+                jsToios("login",800);
+            }
+        });
+    }else if(code!=801){
+        tipInformation(msg);
+    }
+}
 
+// 无缝滚动
+function scrolling(element,liHeight,speed,delay){
+    if(!speed){
+        var speed = 50;//滚动的速度
+    }
+    if(!delay){
+        var delay= 2000;
+    }
+    var time;
+    element.scrollTop=0;
+    element.innerHTML+=element.innerHTML;//克隆一份一样的内容
+    function startScroll(){
+        time=setInterval(function(){
+            scrollUp();
+        },speed);
+        element.scrollTop++;
+    }
+    function scrollUp(){
+        if(element.scrollTop % liHeight==0){
+            clearInterval(time);
+            setTimeout(startScroll,delay);
+        }else{
+            element.scrollTop++;
+            if(element.scrollTop >= element.scrollHeight/2){
+                element.scrollTop =0;
+            }
+        }
+    }
+    setTimeout(startScroll,delay);
+}
+function countDown(val,countdown){
+    // 倒计时60秒
+    if(!countdown){
+        var countdown=60;
+    }
+    settime(val);
+    function settime(val){
+        if (countdown == 0) {
+            val.prop("disabled", false); 
+            val.val("发送验证码");
+            countdown = 60;
+            return false;
+        }else{
+            val.prop("disabled", true); 
+            val.val(countdown+"s");
+            countdown--;
+        }
+        setTimeout(function() {
+            settime(val)
+        },1000)
+    } 
+}

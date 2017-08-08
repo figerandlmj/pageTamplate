@@ -119,7 +119,12 @@ if(ismobile(1)==1){
 }else{
     jsToios("thirdToPay",merno,para,thirdtype,amt);
 }
-
+// 支付返回调用函数
+function applyOrderReturn(flag,this_orderid,msg){
+}
+// 支付点叉叉调用函数
+function payCancel(pram){
+}
 if(ismobile(1)==1){
     if(window.Android.setPayOrder){
         Android.setPayOrder(money,prdordno,paytype,bakseq,merno,"","");

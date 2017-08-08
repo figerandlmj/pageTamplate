@@ -32,7 +32,7 @@
     vertical-align:middle;
 	border:1px solid #f00;
 }
-.date,.telephone,.idcard{
+.date,.telephone,.idcard,.pay-input,.code-btn{
 	width: 80%;
 	height:30px;
     line-height:20px; 
@@ -43,4 +43,109 @@
 }
 .swiper-slide{
 	height:100px;
+}
+.img-wrap{
+	width:90%;
+	height: 150px;
+	position: relative;
+	margin-top:10px;
+	border-radius: 4px;
+	margin-left:10px;
+}
+.img-wrap input{
+	width: 100%;
+	height:48px;
+	opacity: 0;
+	position: absolute;
+	bottom: 0;
+	left:0;
+	z-index: 999;
+}
+.upload-btn{
+	width: 100%;
+	height:48px;
+	line-height: 48px;
+	background-color: #000;
+	opacity: .7;
+	position: absolute;
+	bottom: 0;
+	text-align: center;
+}
+/* 搜索框 */
+.search-box{
+	text-align: center;
+	margin:10px 0px;
+}
+.search-box input{
+	width:90%;
+	height:28px;
+	border-radius: 4px;
+	background: #fff;
+	padding:0px 4px;
+	text-align: center;
+}
+ /* 当前城市 */
+.current-city-wrap{
+	font-size: 1.4rem;
+}
+.current-city-wrap .title{
+	height:35px;
+    line-height: 35px;
+    background: #eeeded;
+    margin-left: 12px;
+    color:#888;
+}
+.current-city-wrap span.current-city{
+	display: inline-block;
+	height:28px;
+	line-height: 28px;
+	background-color: #24c890;
+	margin-left:12px;
+	padding:0px 24px;
+	text-align: center;
+	color:#fff;
+	border-radius: 4px;
+	cursor: pointer;
+}
+ /* 城市选择 */
+.city-main{
+    background: #fff;
+    position: relative;
+    font-size: 1.4rem;
+    color:#000;
+}
+.city-list .title{
+    height:35px;
+    line-height: 35px;
+    background: #eeeded;
+    padding-left: 12px;
+    margin-right:24px;
+    color:#888;
+}
+.city-list .title:first-child{
+	margin-right:0px;
+}
+.city-list .city{
+    height:35px;
+    line-height: 35px;
+    border-bottom: 1px solid #eeeded;
+    margin:0px 30px 0px 12px;
+    cursor: pointer;
+}
+.city-list .city:last-child{
+	border-bottom:none;
+}
+.city-right{
+    width:24px;
+    position:absolute;
+    top:34px;
+    right:0;
+    text-align: center;
+}
+.city-right>div{
+	position: fixed;
+}
+.city-right a{
+	font-size: 1.2rem;
+    color:#24c890;
 }
