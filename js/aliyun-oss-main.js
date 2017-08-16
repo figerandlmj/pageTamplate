@@ -3,8 +3,8 @@
 // 	var client = new OSS.Wrapper({
 //       region: 'oss-cn-hangzhou',
 //       secure: true, 
-//       accessKeyId: 'WowuD1ECUyB3n81l',
-//       accessKeySecret: 'boTGMCyZe86U3M7qRYtgl4MjReFqAH',
+//       accessKeyId: '',
+//       accessKeySecret: '',
 //       bucket: 'hipay'
 //     });
 
@@ -13,8 +13,8 @@
 var client = new OSS.Wrapper({
   	region: 'oss-cn-hangzhou',
   	secure: true, 
-  	accessKeyId: 'WowuD1ECUyB3n81l',
-  	accessKeySecret: 'boTGMCyZe86U3M7qRYtgl4MjReFqAH',
+  	accessKeyId: '',
+  	accessKeySecret: '',
   	bucket: 'hipay'
 });
 
