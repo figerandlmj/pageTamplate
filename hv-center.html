@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+	<title>水平垂直居中</title>
+	<style type="text/css">
+		.clearfix{/* 清除浮动 */
+		  	clear: both;
+		}
+		.clearfix:after{
+		  	display:block;
+		  	clear:both;
+		  	content:"";
+		  	visibility:hidden;
+		  	height:0;
+		  	font-size:0; 
+			line-height:0;
+		}
+		.parent1{
+			text-align: center;
+		}
+		img{
+			display: block;
+			margin:0 auto;
+		}
+		.child2{
+			width:100px;
+			margin:0 auto;
+			text-align: center;
+		}
+		.child3{
+			display: table;
+			margin:0 auto;
+		}
+		.parent4{
+			text-align: center;
+		}
+		.child4{
+			display: inline;
+		}
+		.parent5{
+			position: relative;
+			left: 50%;
+			float: left;
+		}
+		.child5{
+			position: relative;
+			left: -50%;
+		}
+		.v-child1{
+			border:1px solid #ccc;
+			height: 50px;
+			line-height: 50px;
+		}
+		.v-parent2{
+			height:100px;
+			border:1px solid #ccc;
+			display: table;
+		}
+		.v-child2{
+			display: table-cell;/*IE8以下的浏览器可以使用display:inline-block;*/
+			vertical-align: middle;
+		}
+		.v-parent3{
+			position: relative;
+		}
+		.v-child3{
+			width:100px;
+			height:30px;
+			position:absolute;
+		    left: 0;
+		    right: 0;
+		    top: 0;
+		    bottom: 0;
+		    margin:auto;
+		    text-align: center;
+		}
+		.v-parent4{
+			position: relative;
+			margin-top:50px;
+		}
+		.v-child4{
+			position: absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+		}
+		.v-parent5{
+			margin-top:100px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	</style>
+</head>
+<body>
+	<!-- 水平居中 -->
+	<div class="parent1"><span>水平居中</span></div>
+	<img src="images/demo.png" alt="">
+	<div class="child2">水平居中</div>
+	<div class="child3">水平居中</div>
+	<div class="parent4">
+		<div class="child4">水平居中</div>
+	</div>
+	<div class="parent5">
+		<div class="child5">水平居中</div>
+	</div>
+	<!-- 垂直居中 -->
+	<div class="clearfix v-child1">垂直居中</div>
+	<div class="v-parent2">
+		<div class="v-child2">垂直居中</div>
+	</div>
+	<div class="v-parent3">
+		<div class="v-child3">垂直居中</div>
+	</div>
+	<div class="v-parent4">
+		<div class="v-child4">垂直居中</div>
+	</div>
+	<div class="v-parent5">
+		<div class="v-child5">垂直居中</div>
+	</div>
+</body>
+</html>

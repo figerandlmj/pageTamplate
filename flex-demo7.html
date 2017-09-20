@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>流式布局</title>
+	<style type="text/css">
+		.parent {
+		  width: 200px;
+		  height: 150px;
+		  background-color: black;
+		  display: flex;
+		  flex-flow: row wrap;
+		  align-content: flex-start;
+		}
+
+		.child {
+		  flex: 0 0 25%;
+		  height: 50px;
+		  box-sizing: border-box;
+		  background-color: white;
+		  border: 1px solid red;
+		}
+	</style>
+</head>
+<body>
+	<!-- 每行的项目数固定，会自动分行 -->
+	<div class="parent">
+		<div class="child"></div>
+		<div class="child"></div>
+		<div class="child"></div>
+		<div class="child"></div>
+		<div class="child"></div>
+		<div class="child"></div>
+		<div class="child"></div>
+		<div class="child"></div>
+		<div class="child"></div>
+		<div class="child"></div>
+	</div>
+</body>
+</html>

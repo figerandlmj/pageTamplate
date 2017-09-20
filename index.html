@@ -34,7 +34,7 @@
 		<div class="search-wrap">
 			<input type="text" id="search" class="search" placeholder="请输入搜索关键词">
 		</div>
-		<input type="text" readonly id="date" class="date" placeholder="请选择日期">
+		<input type="text" value="" readonly id="date" class="date" placeholder="请选择日期">
 		<input type="tel" value="" placeholder="请输入手机号码" maxlength="13" pattern="[0-9,\s]*" oninput="if(value.length>13)value=value.slice(0,13)" onkeyup="value=value.replace(/[^0-9,\s]/g,'')" onpaste="value=value.replace(/[^0-9,\s]/g,'')" oncontextmenu = "value=value.replace(/[^0-9,\s]/g,'')" class="telephone" id="telephone"/>
 		<input type="text" value="" placeholder="请输入身份证号码" maxlength="18" oninput="if(value.length>18)value=value.slice(0,18);value=value.replace(/[^0-9xX]/g,'')" onpaste="value=value.replace(/[^0-9xX]/g,'')" oncontextmenu = "value=value.replace(/[^0-9xX]/g,'')" class="idcard"/>
 		<!-- 最大十万位 -->

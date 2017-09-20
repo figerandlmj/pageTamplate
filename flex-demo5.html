@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>悬挂式布局</title>
+	<style type="text/css">
+		*{
+			padding:0;
+			margin:0;
+		}
+		.Media {
+		  display: flex;
+		  align-items: flex-start;
+		  margin:.5em;
+		}
+
+		.Media-figure {
+		  margin-right: 1em;
+		}
+		.Media-figure2{
+		  margin-left: 1em;
+		}
+		.Media-figure3{
+			align-self:center;
+		}
+		.Media-body {
+		  flex: 1;
+		}
+	</style>
+</head>
+<body>
+	<div class="Media">
+	  <img class="Media-figure Media-figure3" src="images/demo.png" alt="">
+	  <p class="Media-body">hello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhellohello worldhellohello worldhellohello worldhello</p>
+	</div>
+	<div class="Media">
+	  <p class="Media-body">hello worldhello worldhello worldhello worldhello worldhello world</p>
+	  <img class="Media-figure2" src="images/demo.png" alt="">
+	</div>
+	<div class="Media">
+	  <img class="Media-figure" src="images/demo.png" alt="">
+	  <p class="Media-body">hello worldhello worldhello worldhello worldhello worldhello world</p>
+	</div>
+</body>
+</html>

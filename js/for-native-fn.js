@@ -73,6 +73,13 @@ if(ismobile(1)==1){
     jsToios("addBackAction","backClickFun()");
 }
 
+// 被返回页面被返回时执行方法
+if(ismobile(1)==1){
+    Android.viewAppearAction("getMessage()");
+}else{
+    jsToios("viewAppearAction","getMessage()");
+}
+
 // 登录绑卡
 if(ismobile(1)==1){
     Android.callLogin();

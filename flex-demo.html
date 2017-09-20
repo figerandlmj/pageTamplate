@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
+	<title>flex demo</title>
+	<style type="text/css">
+		.container{
+			width:250px;
+			padding:10px;
+			/*height:150px;*/
+			background-color: #000;
+			margin:0 auto;
+			/*display: flex;
+			justify-content:center;
+			align-items:center;*/
+		}
+		.box {
+			width:100px;
+			height:100px;
+			margin:10px auto;
+			background-color: #f4eeee;
+			border-radius: 6px;
+			border:6px solid #fff;
+			box-sizing: border-box;
+			display: flex;			
+		}
+		.item{
+			width: 20px;
+			height:20px;
+			margin:4px;
+			background-color: #000;
+			border-radius: 50%;
+		}
+		.box1{
+			/*justify-content:center;*/
+			justify-content: flex-end;
+			/*align-items: center;*/
+			align-items: flex-end;
+		}
+		.box2{
+			/*flex-direction: column;*/
+			justify-content: space-between;
+			/*align-items: center;*/
+			/*align-items: flex-end;*/
+		}
+		.box2 .item:nth-child(2) {
+		  align-self: flex-end;
+		}
+		.box3 .item:nth-child(2) {
+		  align-self: center;
+		}
+
+		.box3 .item:nth-child(3) {
+		  align-self: flex-end;
+		}
+		.box4 {
+		  flex-wrap: wrap;
+		  justify-content: flex-end;
+		  align-content: space-between;
+		}
+		.box5 {
+		  flex-wrap: wrap;
+		  align-content: space-between;
+		}
+		.box5 .column {
+		  flex-basis: 100%;
+		  display: flex;
+		  justify-content: space-between;
+		}
+		.box6 {
+		  /*flex-direction: column;*/
+		  flex-wrap: wrap;
+		  align-content: space-between;
+		}
+		.box7 {
+		  flex-wrap: wrap;
+		}
+		.box7 .row{
+		  flex-basis: 100%;
+		  display:flex;
+		  justify-content: space-between;
+		}
+		.box7 .row:nth-child(2){
+		  justify-content: center;
+		}
+		.box8 {
+		  flex-wrap: wrap;
+		  justify-content: space-between;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="box box8">
+		  	<span class="item"></span>
+		  	<span class="item"></span>
+		  	<span class="item"></span>
+		  	<span class="item"></span>
+		  	<span class="item"></span>
+		  	<span class="item"></span>
+		  	<span class="item"></span>
+		  	<span class="item"></span>
+		  	<span class="item"></span>
+		</div>
+		<div class="box box7">
+		  <div class="row">
+		    <span class="item"></span>
+		    <span class="item"></span>
+		    <span class="item"></span>
+		  </div>
+		  <div class="row">
+		    <span class="item"></span>
+		  </div>
+		  <div class="row">
+		     <span class="item"></span>
+		     <span class="item"></span>
+		  </div>
+		</div>
+		<div class="box box6">
+		  	<span class="item"></span>
+		  	<span class="item"></span>
+		  	<span class="item"></span>
+		  	<span class="item"></span>
+		  	<span class="item"></span>
+		  	<span class="item"></span>
+		</div>
+		<div class="box box5">
+		  <div class="column">
+		    <span class="item"></span>
+		    <span class="item"></span>
+		  </div>
+		  <div class="column">
+		    <span class="item"></span>
+		    <span class="item"></span>
+		  </div>
+		</div>
+		<div class="box box4">
+		  	<span class="item"></span>
+		  	<span class="item"></span>
+		  	<span class="item"></span>
+		  	<span class="item"></span>
+		</div>
+		<div class="box box3">
+		  	<span class="item"></span>
+		  	<span class="item"></span>
+		  	<span class="item"></span>
+		</div>
+		<div class="box box2">
+		  	<span class="item"></span>
+		  	<span class="item"></span>
+		</div>
+		<div class="box box1">
+		  	<span class="item"></span>
+		</div>
+	</div>
+</body>
+</html>

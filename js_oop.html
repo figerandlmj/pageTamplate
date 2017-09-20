@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js面向对象编程</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function Foo(){
+			this.y=2;
+		}
+		typeof Foo.prototype;//"object"
+		Foo.prototype.x=1;
+		var obj3=new Foo();
+		obj3.y;//2
+		obj3.x;//1
+		// 函数直接调用this指向的为全局对象。new的为具体对象。
+		function Person(name,age){
+			this.name=name;
+			this.age=age;
+		}
+		Person.prototype.hi=function(){
+			console.log("Hi,my name is "+this.name+",I'm "+this.age+"years old now.");
+		}
+		Person.prototype.LEGS_NUM=2;
+		Person.prototype.ARMS_NUM=2;
+		Person.prototype.walk=function(){
+			console.log(this.name+" is walking...");
+		};
+		function Student(name,age,className){
+			Person.call(this,name,age);
+			this.className=className;
+		}
+		// Object.create()创建一个新的空对象，让Student.prototype指向于它，从而避免了与Person.prototype指向同一对象。进而可以让Student单独创建属于自己的函数，而不影响到Person.
+		Student.prototype=Object.create(Person.prototype);
+		// 这样做了之后Student.prototype.constructor会指向Person，因此为了避免混乱，需要用Student.prototype.constructor = Student 把它修改为指向Student
+		Student.prototype.constructor=Student;
+		Student.prototype.hi=function(){
+			console.log("Hi,my name is "+this.name+",I'm "+this.age+"years old now,and from "+this.className+".");
+		};
+		Student.prototype.learn=function(subject){
+			console.log(this.name+" is learning "+subject+" at"+this.className+".");
+		};
+		var bosn=new Student('Bosn',27,'Class 3,Grade 2');
+		bosn.hi();
+		bosn.LEGS_NUM;//2
+		bosn.walk();
+		bosn.learn('math');
+	</script>
+</body>
+</html>
