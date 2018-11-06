@@ -1,8 +1,8 @@
 // 线上地址
-// var fixed_url="https://www.uutianfu.com/";   
+// var fixed_url="";   
    
 // 测试地址
-var fixed_url="https://www.5ialways.cn/";
+var fixed_url="";
 
 // 公共参数
 var project_url=fixed_url+"film-fhjy/";
